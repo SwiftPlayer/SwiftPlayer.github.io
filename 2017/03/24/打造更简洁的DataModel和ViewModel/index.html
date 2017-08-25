@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>打造更简洁的DataModel和ViewModel | Haofree</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="iOS开发 ● 上海">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="打造更简洁的DataModel和ViewModel | Haofree">
+    <meta name="twitter:description" content="iOS开发 ● 上海">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="打造更简洁的DataModel和ViewModel | Haofree">
+    <meta property="og:description" content="iOS开发 ● 上海">
+
+    
+    <meta name="author" content="Haofree(SwiftPlayer)">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="Haofree" href="/atom.xml">
+    
+
+    <link rel="canonical" href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/03/24/打造更简洁的DataModel和ViewModel/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Haofree 的主页"><img src="/images/avatar.png" width="80" alt="Haofree logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Haofree">Haofree</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">做自己所做，That&#39;s all</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">iOS开发 ● 上海</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+              <li class="navigation__item"><a href="https://github.com/SwiftPlayer">简历</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/SwiftPlayer" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/ObjCfree" title="上Twitter找我" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+  <li class="navigation__item">
+    <a href="mailto:javafree@163.com" title="邮件联系我" target="_blank">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2017-03-24T08:27:07.000Z" class="post-list__meta--date date">2017-03-24</time> &#8226; <span class="post-meta__tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+ </span>
+      <span class="page-pv">
+      &nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">打造更简洁的DataModel和ViewModel</h1>
+  </header>
+
+  <section class="post">
+    <blockquote>
+<p>很多人试图解决 MVC 这种架构下 Controller 比较臃肿的问题，这里我分享一种简洁易懂的Model层，致力于打造更为简洁的DataModel和ViewModel层，同时也适用Controller更加简洁。下面一起分享学习。<a href="https://github.com/SwiftPlayer/ZHModel_Demo">源码：ZHModel_Demo</a></p>
+</blockquote>
+<h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p>对于iOS的APP架构，有很多说法和实践，包括<a href="https://casatwy.com/iosying-yong-jia-gou-tan-viewceng-de-zu-zhi-he-diao-yong-fang-an.html" target="_blank" rel="external">MVC、MVVM、MVCS、VIPER</a>等等。我相信大部分开发者都热衷于MVC这种模式，我们对于 MVC 这种设计模式真的用得好吗？其实不是的，MVC 这种分层方式虽然清楚，但是如果使用不当，很可能让大量代码都集中在 Controller 之中。<br>ZHModel_Demo，提供简洁的DataModel和ViewModel示例。将数据请求封装，用ViewModel层连接控制器和数据，同时用属性映射分离出DataModel层，使数据更清晰，更重要的是将 Controller瘦身。</p>
+<h1 id="二、说明"><a href="#二、说明" class="headerlink" title="二、说明"></a>二、说明</h1><blockquote>
+<p>不论是哪种设计方式，总的架构都是上述那几种，所谓剑法无穷，万剑归宗。但今天我们讨论的是如何将DataModel和ViewModel设计得简洁清晰，可复用。</p>
+</blockquote>
+<p>这里MVVM 的优点拿来借鉴。具体做法就是将 ViewController 给 View 传递数据这个过程，抽象成构造 ViewModel 的过程。这样抽象之后，View 只接受 ViewModel，而 Controller 只需要传递 ViewModel 这么一行代码。而另外构造 ViewModel 的过程，我们就可以移动到另外的类中了。在具体实践中，我们专门创建构造 ViewModel 工厂类，参见工厂模式。另外，我们也将数据模型通过属性映射对应到DataModel，这样使得所有来回的数据模型清晰可见，容易同意修改和复用。同时也可以专门将数据存取都抽将到一个 Service 层，由这层来提供 ViewModel 的获取。</p>
+<h1 id="三、码上说话"><a href="#三、码上说话" class="headerlink" title="三、码上说话"></a>三、码上说话</h1><blockquote>
+<p>下面我分享下代码，看看DataModel和ViewModel有什么优势或者不足的地方</p>
+</blockquote>
+<h4 id="1、目录结构"><a href="#1、目录结构" class="headerlink" title="1、目录结构"></a>1、目录结构</h4><p><img src="http://upload-images.jianshu.io/upload_images/2646525-a34cee8bb04e6562.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目录结构.png"><br>我们熟知的程序包含：网络请求、数据、控制器（视图，业务？），有时会把这几个关系弄得绕来绕去，导致代码臃肿，不好复用和维护。但所有情况无非就是：</p>
+<blockquote>
+<p>1、数据怎么来？<br>2、数据怎么桥接？<br>3、数据怎么呈现？</p>
+</blockquote>
+<h6 id="1）、数据怎么来？"><a href="#1）、数据怎么来？" class="headerlink" title="1）、数据怎么来？"></a>1）、数据怎么来？</h6><p>上述目录解析：</p>
+<blockquote>
+<p>1、网络请求封装成<strong>NetRequest</strong>模块（还包括<strong>HTTPClient</strong>类，这里略）<br>2、数据请求总出口封装在<strong>ZHRequestMethod</strong>类中<br>3、将收到的数据映射到数据模型DataModel(基于<strong>ZHResponseBaseModel  </strong>  )</p>
+</blockquote>
+<h6 id="1）、数据怎么桥接？"><a href="#1）、数据怎么桥接？" class="headerlink" title="1）、数据怎么桥接？"></a>1）、数据怎么桥接？</h6><p>上述目录解析：</p>
+<blockquote>
+<p>1、数据模型和View的桥接用到了ViewModel（基于<strong>ZHViewBaseModel</strong>）<br>2、 用继承于<strong>ZHViewBaseModel</strong>的<strong>PublicViewBaseModel</strong>处理具体网络请求，数据模型和控制器视图的关系</p>
+</blockquote>
+<h6 id="1）、数据怎么呈现？"><a href="#1）、数据怎么呈现？" class="headerlink" title="1）、数据怎么呈现？"></a>1）、数据怎么呈现？</h6><blockquote>
+<p>我们的目的是什么？就是为了让数据呈现更加简洁，让呈现数据的视图控制器变的优雅。视图呈现利用ViewModel轻松展示。</p>
+</blockquote>
+<h4 id="2、数据模型DataModel层"><a href="#2、数据模型DataModel层" class="headerlink" title="2、数据模型DataModel层"></a>2、数据模型DataModel层</h4><p>数据模型DataModel分为网络请求<strong><em>返回参数模型</em></strong>和<strong><em>发送参数模型</em></strong><br><strong>返回参数模型基类ZHResponseBaseModel</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ZHResponseBaseModel.h</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface ZHResponseBaseModel : NSObject</div><div class="line"></div><div class="line">- (void)decodeJsontoDictionary:(NSDictionary*)dic;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ZHResponseBaseModel.m</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ZHResponseBaseModel.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">@implementation ZHResponseBaseModel</div><div class="line"></div><div class="line">- (void)decodeJsontoDictionary:(NSDictionary*)dic&#123;</div><div class="line">    if (![dic isKindOfClass:[NSDictionary class]]) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    for (NSString *key in dic) &#123;</div><div class="line">        if ([self respondsToSelector:@selector(setValue:forKey:)]) &#123;</div><div class="line">            if (class_getProperty([self class], [key UTF8String])) &#123;</div><div class="line">                if (![dic[key] isKindOfClass:[NSNull class]] ) &#123;</div><div class="line">                    [self setValue:dic[key] forKey:key];</div><div class="line">                &#125;else&#123;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>将数据请求返回的Json字典通过属性映射到各个模型字段中，例如Demo当中有三个对应的返回模型，当然这种对应的返回数据模型和参数模型可以放大每个子业务当中。这里以其中一个为例子：<strong>Type1ResponseModel</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Type1ResponseModel.h</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ZHResponseBaseModel.h&quot;</div><div class="line"></div><div class="line">/***********对应的Json格式*******</div><div class="line">&#123;</div><div class="line"> &quot;responseCode&quot;:&quot;0000&quot;,</div><div class="line"> &quot;responseMsg&quot;:&quot;返回成功&quot;,</div><div class="line"> &quot;remark&quot;:&quot;交流学习&quot;,</div><div class="line"> &quot;userName&quot;:&quot;简书Haofree&quot;,</div><div class="line"> &quot;taskNo&quot;:1</div><div class="line">&#125;</div><div class="line">******************************/</div><div class="line"></div><div class="line">@interface Type1ResponseModel : ZHResponseBaseModel</div><div class="line"></div><div class="line">@property (nonatomic , copy) NSString *responseCode;        //响应结果码</div><div class="line"></div><div class="line">@property (nonatomic , copy) NSString *responseMsg;         //响应消息</div><div class="line"></div><div class="line">@property (nonatomic , copy) NSString *remark;              //备注</div><div class="line"></div><div class="line">@property (nonatomic , copy) NSString *userName;            //名字</div><div class="line"></div><div class="line">@property (nonatomic , assign) NSInteger taskNo;            //索引号</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Type1ResponseModel.m</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Type1ResponseModel.h&quot;</div><div class="line"></div><div class="line">@implementation Type1ResponseModel</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>这样当数据请求返回相应的Json字典时可以清晰解析并且通过KVC属性赋值建起返回的数据模型，当然里时最简单的Json，例子中还涉及到了Json中要嵌套的和数组的这种常见的格式。这种把业务字段封装成返回数据模型方便清晰，也可以放到一个大项目的子模块当中去。</p>
+<p><strong>发送参数模型基类ZHParamBaseModel:</strong></p>
+<blockquote>
+<p>既然返回的数据模型可以提取出来封装，我们业务请求当中还有很多需要发送的参数，这如果分散放在视图控制器中将会很糟糕。同样我们可以将每个业务请求的参数封装在类中，这样修改起来我们不关系视图控制器，只关心这个发送参数类，使得数据业务和视图控制器得到很好的分离。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ZHParamBaseModel.h</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface ZHParamBaseModel : NSObject</div><div class="line"></div><div class="line">-(NSDictionary*)covertToDic;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ZHParamBaseModel.m</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ZHParamBaseModel.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">@implementation ZHParamBaseModel</div><div class="line"></div><div class="line">- (NSDictionary *)covertToDic&#123;</div><div class="line">    return [self getPropertyList:[self class]];;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSDictionary *)getPropertyList: (Class)clazz</div><div class="line">&#123;</div><div class="line">    u_int count;</div><div class="line">    unsigned int outCount;</div><div class="line">    Ivar* ivars = class_copyIvarList(clazz, &amp;count);</div><div class="line">    objc_property_t *properties = class_copyPropertyList(clazz, &amp;outCount);</div><div class="line">    NSMutableDictionary *propertyDic = [NSMutableDictionary dictionary];</div><div class="line">    for (int i = 0; i &lt; count ; i++)&#123;</div><div class="line">        objc_property_t property = properties[i];</div><div class="line">        const char *propName = property_getName(property);</div><div class="line">        </div><div class="line">        id value = [self valueForKey:[NSString stringWithFormat:@&quot;%s&quot;,propName]];</div><div class="line">        if (value == nil || [value isKindOfClass:[NSNull class]]) &#123;</div><div class="line">        &#125;else&#123;</div><div class="line">            [propertyDic setValue:value forKey:[NSString  stringWithCString:propName encoding:NSUTF8StringEncoding] ];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    free(ivars);</div><div class="line">    return propertyDic;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="2、-视图-数据-桥接模型ViewModel层"><a href="#2、-视图-数据-桥接模型ViewModel层" class="headerlink" title="2、(视图-数据)桥接模型ViewModel层"></a>2、(视图-数据)桥接模型ViewModel层</h4><p>(视图-数据)桥接模型ViewModel的基类：<strong>ZHViewBaseModel</strong></p>
+<blockquote>
+<p>1、将不同的返回的Json字典转换为数据模型<br>2、将接收封装数据模型通过block回调</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ZHViewBaseModel.h</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">//定义返回请求数据的block类型</div><div class="line">typedef void (^ReturnValueBlock) (id returnValue);</div><div class="line">typedef void (^FailureBlock)(NSUInteger statusCode, NSString *error);</div><div class="line"></div><div class="line">@interface ZHViewBaseModel : NSObject</div><div class="line"></div><div class="line">@property (copy, nonatomic) ReturnValueBlock returnBlock;</div><div class="line">@property (copy, nonatomic) FailureBlock failureBlock;</div><div class="line"></div><div class="line">//接收封装数据请求返回的block</div><div class="line">-(void) setBlockWithReturnBlock: (ReturnValueBlock) returnBlock</div><div class="line">               WithFailureBlock: (FailureBlock) failureBlock;</div><div class="line"></div><div class="line">//将返回的Json字典转换为数据模型</div><div class="line">-(id)process:(NSString*)className dic:(id)response;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ZHViewBaseModel.m</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ZHViewBaseModel.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line"></div><div class="line">@implementation ZHViewBaseModel</div><div class="line"></div><div class="line">#pragma 接收封装数据请求透穿过来的block</div><div class="line">-(void) setBlockWithReturnBlock: (ReturnValueBlock) returnBlock</div><div class="line">               WithFailureBlock: (FailureBlock) failureBlock&#123;</div><div class="line">    _returnBlock = [returnBlock copy];</div><div class="line">    _failureBlock = [failureBlock copy];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(id)process:(NSString*)className dic:(id)response&#123;</div><div class="line">    __strong Class model = [NSClassFromString(className) alloc];</div><div class="line">    SEL selector = NSSelectorFromString(@&quot;decodeJsontoDictionary:&quot;);</div><div class="line">    if ([model respondsToSelector:selector]) &#123;</div><div class="line">        [model performSelector:selector withObject:response];</div><div class="line">    &#125;</div><div class="line">    return model;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>另外就是具体处理网络请求出口的公共ViewModel类：<strong>PublicViewBaseModel</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  PublicViewBaseModel.h</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ZHViewBaseModel.h&quot;</div><div class="line"></div><div class="line">@interface PublicViewBaseModel : ZHViewBaseModel</div><div class="line"></div><div class="line">//数据请求层，举例三个数据请求</div><div class="line">- (void)sendType1Request:(NSDictionary*)dic;</div><div class="line"></div><div class="line">- (void)sendType2Request:(NSDictionary*)dic;</div><div class="line"></div><div class="line">- (void)sendType3Request:(NSDictionary*)dic;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  PublicViewBaseModel.m</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;PublicViewBaseModel.h&quot;</div><div class="line">#import &quot;ZHRequestMethod.h&quot;</div><div class="line"></div><div class="line">@implementation PublicViewBaseModel</div><div class="line"></div><div class="line">- (void)sendType1Request:(NSDictionary*)dic&#123;</div><div class="line">    [self requestNet:dic type:RequestInterfaceNO1];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)sendType2Request:(NSDictionary*)dic&#123;</div><div class="line">    [self requestNet:dic type:RequestInterfaceNO2];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)sendType3Request:(NSDictionary*)dic&#123;</div><div class="line">    [self requestNet:dic type:RequestInterfaceNO3];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)requestNet:(NSDictionary*)dic type:(RequestInterface)type&#123;</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [ZHRequestMethod startRequest:dic type:type success:^(id responseObject)&#123;</div><div class="line">        NSLog(@&quot;%@&quot;, responseObject);</div><div class="line">        __strong typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        if (strongSelf) &#123;</div><div class="line">            [strongSelf sucessResponse:responseObject type:type];</div><div class="line">        &#125;</div><div class="line">    &#125;failure:^(NSUInteger statusCode, NSString *error)&#123;</div><div class="line">        __strong typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        if (strongSelf) &#123;</div><div class="line">            strongSelf.failureBlock(statusCode,error);</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)sucessResponse:(id)responseObject type:(RequestInterface)type&#123;</div><div class="line">    NSString *className = @&quot;&quot;;</div><div class="line">    switch (type) &#123;</div><div class="line">        case RequestInterfaceNO1:</div><div class="line">            className = @&quot;Type1ResponseModel&quot;;</div><div class="line">            break;</div><div class="line">        case RequestInterfaceNO2:</div><div class="line">            className = @&quot;Type2ResponseModel&quot;;</div><div class="line">            break;</div><div class="line">        case RequestInterfaceNO3:</div><div class="line">            className = @&quot;Type3ResponseModel&quot;;</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">    &#125;</div><div class="line">    id result = [self process:className dic:responseObject];</div><div class="line">    if (self.returnBlock) &#123;</div><div class="line">        self.returnBlock(result);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="1、视图呈现"><a href="#1、视图呈现" class="headerlink" title="1、视图呈现"></a>1、视图呈现</h4><p>例子中一个视图控制器有三个数据请求和对应的数据，返回数据一个地方处理即可，简洁，需要用到数据的，直接从数据模型中取值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ViewController.m</div><div class="line">//  ZHModel_Demo</div><div class="line">//</div><div class="line">//  Created by haofree on 2017/3/3.</div><div class="line">//  Copyright © 2017年 haofree. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &quot;PublicViewBaseModel.h&quot;</div><div class="line">#import &quot;Type1ResponseModel.h&quot;</div><div class="line">#import &quot;Type2ResponseModel.h&quot;</div><div class="line">#import &quot;Type3ResponseModel.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line">@property (nonatomic , strong) PublicViewBaseModel *viewModel;</div><div class="line">@property (nonatomic , strong) Type1ResponseModel  *responseModel_1;</div><div class="line">@property (nonatomic , strong) Type2ResponseModel  *responseModel_2;</div><div class="line">@property (nonatomic , strong) Type3ResponseModel  *responseModel_3;</div><div class="line">@property (nonatomic , strong) Type3ResponseSubListModel  *responseSubListModel_3;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.viewModel = [[PublicViewBaseModel alloc] init];</div><div class="line">    self.responseModel_1 = [[Type1ResponseModel alloc] init];</div><div class="line">    self.responseModel_2 = [[Type2ResponseModel alloc] init];</div><div class="line">    self.responseModel_3 = [[Type3ResponseModel alloc] init];</div><div class="line">    self.responseSubListModel_3 = [[Type3ResponseSubListModel alloc] init];</div><div class="line">    [self getResponseDataModel];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)didReceiveMemoryWarning &#123;</div><div class="line">    [super didReceiveMemoryWarning];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//返回的数据</div><div class="line">- (void) getResponseDataModel&#123;</div><div class="line">    __weak __typeof(self)wekself = self;</div><div class="line">    [self.viewModel setBlockWithReturnBlock:^(id returnValue) &#123;</div><div class="line">        __strong typeof(wekself)strongSelf = wekself;</div><div class="line">        if ([returnValue isKindOfClass:[Type1ResponseModel class]]) &#123;</div><div class="line">            strongSelf.responseModel_1 = (Type1ResponseModel*)returnValue;</div><div class="line">            NSLog(@&quot;responseModel_1:%@&quot;,strongSelf.responseModel_1);</div><div class="line">        &#125;else if ([returnValue isKindOfClass:[Type2ResponseModel class]])&#123;</div><div class="line">            strongSelf.responseModel_2 = (Type2ResponseModel*)returnValue;</div><div class="line">            NSLog(@&quot;responseModel_2:%@&quot;,strongSelf.responseModel_2);</div><div class="line">            </div><div class="line">        &#125;else if ([returnValue isKindOfClass:[Type3ResponseModel class]])&#123;</div><div class="line">            strongSelf.responseModel_3 = (Type3ResponseModel*)returnValue;</div><div class="line">            strongSelf.responseSubListModel_3 = strongSelf.responseModel_3.subTaskList[0];</div><div class="line">            NSLog(@&quot;responseModel_3:%@&quot;,strongSelf.responseModel_3);</div><div class="line">        &#125;else&#123;</div><div class="line">            NSLog(@&quot;无法识别的模型类&quot;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125; WithFailureBlock:^(NSUInteger statusCode, NSString *error) &#123;</div><div class="line">        NSLog(@&quot;错误码:%lu,错误信息：%@&quot;,(unsigned long)statusCode,error);</div><div class="line">    &#125;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//发送的请求</div><div class="line">- (IBAction)requestBtn1:(id)sender&#123;</div><div class="line">    [self.viewModel sendType1Request:@&#123;&#125;];</div><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">       </div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>文章分享用于交流学习，一直处于学习积累过程中，文中最开始的思路来自于<a href="https://github.com/lizelu/MVVM">李泽鲁—青玉伏案大神的MVVM工程架构</a>，在这个基础上做了更多的改进。技术的积累，源于吸取，感谢同事和一起学习的朋友，大家批判指正。</p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">最近的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/07/14/SiriKit预研/" title="SiriKit预研">SiriKit预研</a></h2>
+                <p class="excerpt">
+                
+                一、SiriKit介绍Siri是一款苹果 iOS 系统提供的智能语音助手软件，它的全名是 Speech Interpretation and Recognition Interface。2011年 Siri第一次以 iOS 内置软件的形式随 iPhone 4s 一同问世之后，终于在 WWDC 201
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-07-14T05:34:15.000Z" class="post-list__meta--date date">2017-07-14</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/07/14/SiriKit预研/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+        
+     
+   
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2017 - 本站使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题,
+        由<a href="https://github.com/SwiftPlayer">@Haofree</a> 修改自 <a href="https://github.com/SwiftPlayer" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+    </span>
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>
