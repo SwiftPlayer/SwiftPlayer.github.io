@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>SiriKit预研 | Haofree</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="iOS开发 ● 上海">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SiriKit预研 | Haofree">
+    <meta name="twitter:description" content="iOS开发 ● 上海">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SiriKit预研 | Haofree">
+    <meta property="og:description" content="iOS开发 ● 上海">
+
+    
+    <meta name="author" content="Haofree(SwiftPlayer)">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+    <link rel="icon" href="/images/avatar-small.png">
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="Haofree" href="/atom.xml">
+    
+
+    <link rel="canonical" href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/07/14/SiriKit预研/"/>
+
+                 
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Haofree 的主页"><img src="/images/avatar.png" width="80" alt="Haofree logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Haofree">Haofree</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">做自己所做，That&#39;s all</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">iOS开发 ● 上海</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+              <li class="navigation__item"><a href="https://github.com/SwiftPlayer">简历</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/SwiftPlayer" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/ObjCfree" title="上Twitter找我" target="_blank">
+      <i class='social fa fa-twitter'></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+  <li class="navigation__item">
+    <a href="mailto:javafree@163.com" title="邮件联系我" target="_blank">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-purple"></div>
+  </div> 
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2017-07-14T05:34:15.000Z" class="post-list__meta--date date">2017-07-14</time> &#8226; <span class="post-meta__tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+ </span>
+      <span class="page-pv">
+      &nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">SiriKit预研</h1>
+  </header>
+
+  <section class="post">
+    <h2 id="一、SiriKit介绍"><a href="#一、SiriKit介绍" class="headerlink" title="一、SiriKit介绍"></a>一、SiriKit介绍</h2><p><code>Siri</code>是一款苹果 iOS 系统提供的智能语音助手软件，它的全名是 <code>Speech Interpretation and Recognition Interface</code>。2011年 <code>Siri</code>第一次以 iOS 内置软件的形式随 <code>iPhone 4s</code> 一同问世之后，终于在 <code>WWDC 2016</code> 上，苹果开放了<code>Siri</code> 的 API，开发者们可以利用<code>SiriKit</code>将自己的服务提供给用户。<br>备注：<code>SiriKit</code>是系统调用，是一个语义处理结合扩展<code>UI</code>的框架，不是语音转文字的框架。</p>
+<h4 id="1、SiriKit提供11类服务领域，详情请见苹果官方文档"><a href="#1、SiriKit提供11类服务领域，详情请见苹果官方文档" class="headerlink" title="1、SiriKit提供11类服务领域，详情请见苹果官方文档"></a>1、SiriKit提供11类服务领域，详情请见<a href="https://developer.apple.com/documentation/sirikit#//apple_ref/doc/uid/TP40016875-CH9-SW2" target="_blank" rel="external">苹果官方文档</a></h4><table>
+<thead>
+<tr>
+<th>SiriKit 服务领域（Domain）</th>
+<th>对应的意图(Intent)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语音和视频通话 (VoIP calling)</td>
+<td>INSearchCallHistoryIntent、INStartAudioCallIntent、INStartVideoCallIntent</td>
+</tr>
+<tr>
+<td>发送消息 (Messaging)</td>
+<td>INSendMessageIntent</td>
+</tr>
+<tr>
+<td>收款或者付款 (Payments)</td>
+<td>INSendPaymentIntent、INRequestPaymentIntent</td>
+</tr>
+<tr>
+<td>列表和笔记 (Lists and Notes)</td>
+<td>INCreateNoteIntent、INAppendToNoteIntent</td>
+</tr>
+<tr>
+<td>视觉编码 (Visual Codes)</td>
+<td>INGetVisualCodeIntent</td>
+</tr>
+<tr>
+<td>图片搜索 (Photo search)</td>
+<td>INSearchForPhotosIntent</td>
+</tr>
+<tr>
+<td>管理锻炼 (Workouts)</td>
+<td>INEndWorkoutIntent、INPauseWorkoutIntent 、INStartWorkoutIntent 、 INResumeWorkoutIntent 、INCancelWorkoutIntent</td>
+</tr>
+<tr>
+<td>行程预约  (Ride booking)</td>
+<td>INRequestRideIntent、INGetRideStatusIntent、 INListRideOptionsIntent、 INGetRideStatusIntent</td>
+</tr>
+<tr>
+<td>车载管理 (Car Commands)</td>
+<td>INGetCarLockStatusIntent、INSetCarLockStatusIntent、INActivateCarSignalIntent</td>
+</tr>
+<tr>
+<td>车载系统 (CarPlay)</td>
+<td>INSetAudioSourceInCarIntent、 INSetClimateSettingsInCarIntent、 INSetSeatSettingsInCarIntent、INSaveProfileInCarIntent、INSetProfileInCarIntent、INSetRadioStationIntent</td>
+</tr>
+<tr>
+<td>餐厅订位  (Restaurant Reservations)</td>
+<td>INBookRestaurantReservationIntent、  INGetAvailableRestaurantReservationBookingDefaultsIntent、 INGetAvailableRestaurantReservationBookingsIntent、 INGetRestaurantGuestIntent、 INGetUserCurrentRestaurantReservationBookingsIntent</td>
+</tr>
+</tbody>
+</table>
+<p>简单来说，在<code>SiriKit</code>的开发功能基本上就是在苹果提供的这些领域(<code>Domain</code>)上，在App开发中需要开发哪种领域的功能，就要在对应的<code>plist</code>文件中添加对应的<code>Intent</code>支持（<em>具体在哪个plist文件下文有说明</em>）那什么是<code>Intent</code>？<br>备注：SiriKit不是万能的，语义的处理流程要按照苹果的套路来（应用领域，意图），界面UI也套路来，不能调用App内部页面，具体UI会有SiriKit的UI扩展来实现。</p>
+<h4 id="2、Intent的说明"><a href="#2、Intent的说明" class="headerlink" title="2、Intent的说明"></a>2、Intent的说明</h4><p>要想了解Intent，首先要清楚SiriKit的外部工作流程：<br>1)、 Siri完成语音识别和语义分析；<br>2)、会根据你词汇中的关键词识别出你属于上述11种领域中的哪一种；<br>3)、然后将结构化语音分析结果打包成一个某个领域（Domain）的意图(Intent)；<br>4)、接着交给支持这个意图（Intent）的第三方应<br>用，第三方应用被启动，从 传入的Intent中获取相应的信息，完成操作。<br>整个宏观的流程如下图：<br><img src="media/14994794583384/SiriKit%E6%B5%81%E7%A8%8B.png" alt="SiriKit流程"></p>
+<p>例如，上图演示中提到了的例句 “用苏宁发消息给小明”，</p>
+<p>领域 （Domain）：Messaging<br>意图 （Intent）：Send a message （INSendMessageIntent）<br>意图参数 （Intent Parameter）<br>收件人（recipients）：小明<br>消息内容（content）：空<br><strong>备注：（如果没有消息内容，这时就会涉及到Sikit的API中提供的处理机制，这个机制会调Siri反问你要发送什么内容，这个就涉及到下文提到的SiriKit相关功能和处理流程，会有不同的扩展和类在处理这个问题）</strong></p>
+<h2 id="二、SiriKit功能开发介绍"><a href="#二、SiriKit功能开发介绍" class="headerlink" title="二、SiriKit功能开发介绍"></a>二、SiriKit功能开发介绍</h2><h4 id="1、发消息意图API（举例）"><a href="#1、发消息意图API（举例）" class="headerlink" title="1、发消息意图API（举例）"></a>1、发消息意图API（举例）</h4><h5 id="1）、发消息INSendMessageIntent配置"><a href="#1）、发消息INSendMessageIntent配置" class="headerlink" title="1）、发消息INSendMessageIntent配置"></a>1）、发消息INSendMessageIntent配置</h5><p>涉及到<code>SiriKit</code>的基本项目文件：<br><img src="media/14994794583384/siri%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="siri目录结构图"></p>
+<p><img src="media/14994794583384/IntentConfig.png" alt="IntentConfig"></p>
+<h5 id="2）、发消息INSendMessageIntent相关协议方法"><a href="#2）、发消息INSendMessageIntent相关协议方法" class="headerlink" title="2）、发消息INSendMessageIntent相关协议方法"></a>2）、发消息INSendMessageIntent相关协议方法</h5><p>一个标准的意图语音被<code>Siri</code>识别之后，<code>SiriKit</code>会先进入一个继承于<code>INExtension</code>的指定意图流程入口(<code>NSExtensionPrincipalClass</code>)类<code>IntentHandler.m</code>(默认类)。下面在这个相关类会处理整个流程：<br><img src="media/14994794583384/IntentLifeCycle.png" alt="IntentLifeCycle"></p>
+<table>
+<thead>
+<tr>
+<th>方法列表</th>
+<th>中文解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-resolveRecipientsForSendMessage:withCompletion:</td>
+<td>解析发送消息语义，提取意图对象</td>
+</tr>
+<tr>
+<td>- resolveContentForSendMessage:withCompletion:</td>
+<td>解析发送消息内容方法</td>
+</tr>
+<tr>
+<td>- confirmSendMessage:completion:</td>
+<td>确认方法</td>
+</tr>
+<tr>
+<td>- handleSendMessage:completion:</td>
+</tr>
+</tbody>
+</table>
+<p> 处理方法 |</p>
+<p>意图的生命周期如下图文描述：</p>
+<p>一个典型的<code>Intent</code>事件的处理过程中有这三个步骤<code>Resolve</code>、<code>Confirm</code>和<code>Handle</code></p>
+<ol>
+<li><code>Resolve</code>阶段。在<code>Siri</code>获取到用户的语音输入之后，生成一个<code>INIntent</code>对象，将语音中的关键信息提取出来并且填充对应的属性。这个对象在稍后会传递给我们设置好的<code>INExtension</code>子类对象进行处理，根据子类遵循的不同协议来选择不同的解决方案。</li>
+</ol>
+<ol>
+<li><code>Confirm</code>阶段。在上一个阶段通过<code>handlerForIntent:(INIntent *)</code>返回了处理<code>Intent</code>的对象，此阶段会依次调用<code>confirm</code>打头的实例方法来判断<code>Siri</code>填充的信息是否完成。匹配的判断结果包括<code>Exactly one match</code>、<code>Two or more matches</code>以及<code>No match</code>三种情况。这个过程中可以让<code>Siri</code>向用户征求更具体的参数信息。</li>
+</ol>
+<ol>
+<li><code>Handle</code>阶段。在<code>confirm</code>方法执行完成之后，<code>Siri</code>进行最后的处理阶段，生成答复对象，并且向此Intent对象确认处理结果然后执显示结果给用户看。<br><img src="media/14994794583384/resolve_confirm_handle_cycle.png" alt="resolve_confirm_handle_cycle"></li>
+</ol>
+<h5 id="3）、发消息INSendMessageIntent的意图对象"><a href="#3）、发消息INSendMessageIntent的意图对象" class="headerlink" title="3）、发消息INSendMessageIntent的意图对象"></a>3）、发消息INSendMessageIntent的意图对象</h5><p>具体在各个阶段的方法里怎么代码实现，主要是要理解<code>INSendMessageIntent</code>的对象属性，通过解析对象，可以在各个阶段用获取到的对象进行相关程序逻辑编码。如：</p>
+<table>
+<thead>
+<tr>
+<th>对象名称</th>
+<th>类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>recipients</code></td>
+<td><code>NSArray&lt;INPerson*&gt;</code></td>
+<td>Contacts to whom the message should be sent.</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td><code>NSString</code></td>
+<td>Body text of the message.</td>
+</tr>
+<tr>
+<td><code>groupName</code></td>
+<td><code>NSString</code></td>
+<td>Body text of the message.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>NSString</code></td>
+<td>Specified service for the message.</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td><code>INPerson</code></td>
+<td>The person, or account, sending the message.</td>
+</tr>
+</tbody>
+</table>
+<p>通过流程方法里获取到<code>INSendMessageIntent</code>对象进行解析，匹配，处理，这个过程还涉及到返回的处理。每一个解析方法都需要得到一个<code>INIntentResolutionResult</code>类型的实例，用来保存校验结果。</p>
+<p><code>INIntentResolutionResult</code>及其子类有不同的构造方法生成不同类型的结果，用来指定和Siri的交互。</p>
+<table>
+<thead>
+<tr>
+<th>值类型 <code>INIntentResolutionResult</code></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+ (instancetype)needsValue;</code></td>
+<td>需要一个值，Siri会提示用户给一个值</td>
+</tr>
+<tr>
+<td><code>+ (instancetype)notRequired;</code></td>
+<td>不是必要的，是否给值都会过这个resolve</td>
+</tr>
+<tr>
+<td><code>+ (instancetype)unsupported;</code></td>
+<td>不支持的，Siri会提示用户这个值不被支持</td>
+</tr>
+<tr>
+<td><code>+(instancetype)successWithResolvedValue:(BOOL)resolvedValue;</code></td>
+<td>成功解析</td>
+</tr>
+<tr>
+<td><code>+(instancetype)confirmationRequiredWithValueToConfirm:(nullable NSNumber *)valueToConfirm;</code></td>
+<td>Siri提示用户确认当前是否是一个bool值</td>
+</tr>
+</tbody>
+</table>
+<p>当一个<code>intent</code>的所有参数都成功解析了，处理程序就会向用户询问是否确认这个<code>intent</code>的细节，并且提供一个建议响应。当所有参数被成功解析后，或者在不要求所有参数进行解析，那么就认为是解析成功。<br>在确认期间，就可以执行所有的<code>intent</code>参数的附加验证，以确保你可以使用该信息来执行所请求的服务。如果之前的解析函数是单元测试，那么这个确认函数就是集成测试，保证所有输入参数正确。</p>
+<p>最后一个处理<code>intent</code>的阶段，就是执行与这个<code>intent</code>相关的动作。在<code>-handleSendPayment:completion</code>函数中做相应业务逻辑，需要注意的是你在<code>Extension</code>中做的修改也应当反应到App主程序当中，所以需要提供任务的数据给到App。<code>SiriKit</code>提供了一个包含<code>intent</code>细节（<code>INIntent、INIntentResponse）</code>的<code>InInteraction</code>对象，你可以使用<code>userActivityInstance.interaction</code>得到它，在App启动时调用<br><code>- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler</code><br>函数处理来自<code>Extension</code>的数据。</p>
+<h5 id="4）、根据流程方法处理之后，如何与主程序通信"><a href="#4）、根据流程方法处理之后，如何与主程序通信" class="headerlink" title="4）、根据流程方法处理之后，如何与主程序通信"></a>4）、根据流程方法处理之后，如何与主程序通信</h5><p>轻量级通信可采用这个办法：<br>1）、在<code>handling</code>阶段在<code>NSUserActivity</code>存储相应的信息，字典或字符串都行（如上<code>handling</code>阶段代码）。<br>2）、在<code>AppDelegate</code>，获取<code>NSUserActivity</code>所存储的信息。<br>3）、发送通知给所需要的地方。<br>4）、接收到通知后对主程序进行相应操作。</p>
+<p><em>备注：确认消息发送之后的逻辑也可以在处理阶段编码解决</em></p>
+<p>有关在AppDelegate中处理SiriKit的Intent可以参考<a href="https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623072-application?language=objc" target="_blank" rel="external">相关苹果官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//AppDelegate.m</div><div class="line">- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</div><div class="line">    return NO;</div><div class="line">&#125;</div><div class="line">- (BOOL)application:(UIApplication *)application</div><div class="line">   continueUserActivity:(NSUserActivity *)userActivity</div><div class="line">restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler &#123;</div><div class="line">    if ([userActivity.interaction.intent isKindOfClass:[INSendMessageIntent class]]) &#123;</div><div class="line">        INSendMessageIntent *intent = (INSendMessageIntent *)(userActivity.interaction.intent);</div><div class="line">        NSLog(@&quot;%@&quot;,[[intent.recipients lastObject] displayName]);</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2、自定义界面-Intent-UI-Extension"><a href="#2、自定义界面-Intent-UI-Extension" class="headerlink" title="2、自定义界面(Intent UI Extension)"></a>2、自定义界面(Intent UI Extension)</h4><p>运用SiriKit开发相关功能，UI是依赖于<code>Intent UI Extension</code>，<code>SiriKit</code>并不能从系统层面调用App内部<code>UI</code>，只能调用打开App和<code>SirKit</code>自定义<code>UI</code>。</p>
+<p>系统创建了<code>ViewController</code>，加载视图，调用<code>viewDidLoad</code>方法并且调用了<code>INUIHostedViewControlling</code>协议的<code>configureWithInteraction:context:completion:</code>方法，传递了一个交互对象，用于配置界面。 当配置完成后，<code>ViewController</code>就会展示在<code>Siri</code>或者<code>Maps</code>应用界面的空白部分。这时会调用<code>viewWillAppear/viewDidAppea</code>r方法。<br>当视图消失时，也会调用生命周期的<code>viewWillDisappear/viewDidDisappear</code>方法。</p>
+<p><img src="media/14994794583384/siriUILifeCycle.png" alt="siriUILifeCycle"></p>
+<h4 id="关于控制器的使用，苹果给出了几点注意事项："><a href="#关于控制器的使用，苹果给出了几点注意事项：" class="headerlink" title="关于控制器的使用，苹果给出了几点注意事项："></a>关于控制器的使用，苹果给出了几点注意事项：</h4><ol>
+<li>切换子控制器来展示不同类型的内容。 你的Intents UI扩展只有一个主视图控制器，如果你想为不同的Intents展示不同的内容，你需要使用不同的视图。可以在<code>configureWithInteraction:context:completion:</code>这个方法里面，根据提供的intentObject来创建不同的子视图。</li>
+</ol>
+<ol>
+<li>在你的视图控制器可用的期间，动态调整内容。 在 <code>viewDidAppear</code>:方法里面才开始启动动画，在<code>viewWillDisappear</code>: 方法里面要结束动画。</li>
+</ol>
+<ol>
+<li>尽快的配置好你的视图控制器，这样<code>Siri</code>才能更快的展示它。 你的视图控制器也许不会在屏幕上停留太久，所以尽量利用本地资源以及提供的<code>INInteraction</code>对象来配置你的设置。如果你需要从服务器拉取更多的信息，请异步完成，并在稍后再更新你的界面。</li>
+</ol>
+<ol>
+<li><strong>请不要在界面里面展示广告</strong>。你可以展示你自己的品牌信息，但是你不能够加入其它广告。<h2 id="三、结束"><a href="#三、结束" class="headerlink" title="三、结束"></a>三、结束</h2>发消息例子：<br>对 <code>Siri</code>说：“用演示给小明发消息”<br><img src="media/14994794583384/IMG_0003.png" alt="IMG_0003"></li>
+</ol>
+<p>转账例子：<br><img src="media/14994794583384/IMG_0009.png" alt="IMG_0009"></p>
+
+  </section>
+
+</article>
+
+<section class="read-more">
+     
+   
+  
+</section>
+
+  
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2017 - 本站使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">new-vno</a> 主题,
+        由<a href="https://github.com/SwiftPlayer">@Haofree</a> 修改自 <a href="https://github.com/SwiftPlayer" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+    </span>
+    
+</footer>
+
+
+        </div>
+    </div>
+
+     
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-78918255-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cdad07c755fa23f6aced510c6760e87";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    
+</body>
+</html>

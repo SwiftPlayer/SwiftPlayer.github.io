@@ -1,0 +1,47 @@
+# SiriKit预研
+##一、SiriKit介绍
+`Siri `是一款苹果 iOS 系统提供的智能语音助手软件，它的全名是 `Speech Interpretation and Recognition Interface`。2011年 `Siri `第一次以 iOS 内置软件的形式随 `iPhone 4s` 一同问世之后，终于在 `WWDC 2016` 上，苹果开放了` Siri` 的 API，开发者们可以利用SiriKit将自己的服务提供给用户。
+备注：SiriKit是系统调用，是一个语义处理结合扩展UI的框架，不是语音转文字的框架。
+
+
+####1、SiriKit提供11类服务领域，详情请见[苹果官方文档](https://developer.apple.com/documentation/sirikit#//apple_ref/doc/uid/TP40016875-CH9-SW2)
+
+| SiriKit 服务领域（Domain） | 对应的意图(Intent) |
+| --- | --- |
+| 语音和视频通话 (VoIP calling) | INSearchCallHistoryIntent、INStartAudioCallIntent、INStartVideoCallIntent|
+| 发送消息 (Messaging) | INSendMessageIntent |
+| 收款或者付款 (Payments) | INSendPaymentIntent、INRequestPaymentIntent |
+| 列表和笔记 (Lists and Notes) | INCreateNoteIntent、INAppendToNoteIntent |
+| 视觉编码 (Visual Codes) | INGetVisualCodeIntent |
+| 图片搜索 (Photo search) | INSearchForPhotosIntent |
+| 管理锻炼 (Workouts) | INEndWorkoutIntent、INPauseWorkoutIntent 、INStartWorkoutIntent 、 INResumeWorkoutIntent 、INCancelWorkoutIntent |
+| 行程预约  (Ride booking)| INRequestRideIntent、INGetRideStatusIntent、 INListRideOptionsIntent、 INGetRideStatusIntent|
+| 车载管理 (Car Commands)| INGetCarLockStatusIntent、INSetCarLockStatusIntent、INActivateCarSignalIntent|
+| 车载系统 (CarPlay)| INSetAudioSourceInCarIntent、 INSetClimateSettingsInCarIntent、 INSetSeatSettingsInCarIntent、INSaveProfileInCarIntent、INSetProfileInCarIntent、INSetRadioStationIntent|
+| 餐厅订位  (Restaurant Reservations)|  INBookRestaurantReservationIntent、  INGetAvailableRestaurantReservationBookingDefaultsIntent、 INGetAvailableRestaurantReservationBookingsIntent、 INGetRestaurantGuestIntent、 INGetUserCurrentRestaurantReservationBookingsIntent|
+
+简单来说，在`SiriKit`的开发功能基本上就是在苹果提供的这些领域(`Domain`)上，在App开发中需要开发哪种领域的功能，就要在对应的`plist`文件中添加对应的`Intent`支持（*具体在哪个plist文件下文有说明*）那什么是`Intent`？
+备注：SiriKit不是万能的，语义的处理流程要按照苹果的套路来（应用领域，意图），界面UI也套路来，不能调用App内部页面，具体UI会有SiriKit的UI扩展来实现。
+####2、Intent的说明
+要想了解Intent，首先要清楚SiriKit的外部工作流程：
+1)、 Siri完成语音识别和语义分析；
+2)、会根据你词汇中的关键词识别出你属于上述11种领域中的哪一种；
+3)、然后将结构化语音分析结果打包成一个某个领域（Domain）的意图(Intent)；
+4)、接着交给支持这个意图（Intent）的第三方应用，第三方应用被启动，从 传入的Intent中获取相应的信息，完成操作。
+整个宏观的流程如下图：
+![SiriKit流程](media/14996534577644/SiriKit%E6%B5%81%E7%A8%8B.png)
+
+
+
+例如，上图演示中提到了的例句 “用SiriKit演示发消息给小明"，
+
+领域 （Domain）：Messaging
+意图 （Intent）：Send a message （INSendMessageIntent）
+意图参数 （Intent Parameter）
+收件人（recipients）：小明
+消息内容（content）：空
+**备注：（如果没有消息内容，这时就会涉及到Sikit的API中提供的处理机制，这个机制会调Siri反问你要发送什么内容，这个就涉及到下文提到的SiriKit相关功能和处理流程，会有不同的扩展和类在处理这个问题）**
+
+##一、SiriKit相关功能开发
+
+
