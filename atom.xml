@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/"/>
-  <updated>2017-08-25T14:33:49.000Z</updated>
+  <updated>2017-08-27T09:25:13.000Z</updated>
   <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/07/14/SiriKit%E9%A2%84%E7%A0%94/"/>
     <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/07/14/SiriKit预研/</id>
     <published>2017-07-14T05:34:15.000Z</published>
-    <updated>2017-08-25T14:33:49.000Z</updated>
+    <updated>2017-08-27T09:25:13.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="一、SiriKit介绍"><a href="#一、SiriKit介绍" class="headerlink" title="一、SiriKit介绍"></a>一、SiriKit介绍</h2><p><code>Siri</code>是一款苹果 iOS 系统提供的智能语音助手软件，它的全名是 <code>Speech Interpretation and Recognition Interface</code>。2011年 <code>Siri</code>第一次以 iOS 内置软件的形式随 <code>iPhone 4s</code> 一同问世之后，终于在 <code>WWDC 2016</code> 上，苹果开放了<code>Siri</code> 的 API，开发者们可以利用<code>SiriKit</code>将自己的服务提供给用户。<br>备注：<code>SiriKit</code>是系统调用，是一个语义处理结合扩展<code>UI</code>的框架，不是语音转文字的框架。</p>
 <h4 id="1、SiriKit提供11类服务领域，详情请见苹果官方文档"><a href="#1、SiriKit提供11类服务领域，详情请见苹果官方文档" class="headerlink" title="1、SiriKit提供11类服务领域，详情请见苹果官方文档"></a>1、SiriKit提供11类服务领域，详情请见<a href="https://developer.apple.com/documentation/sirikit#//apple_ref/doc/uid/TP40016875-CH9-SW2" target="_blank" rel="external">苹果官方文档</a></h4><table>
@@ -466,7 +466,7 @@
     <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/03/24/%E6%89%93%E9%80%A0%E6%9B%B4%E7%AE%80%E6%B4%81%E7%9A%84DataModel%E5%92%8CViewModel/"/>
     <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/03/24/打造更简洁的DataModel和ViewModel/</id>
     <published>2017-03-24T08:27:07.000Z</published>
-    <updated>2017-08-27T07:38:37.000Z</updated>
+    <updated>2017-08-27T09:24:46.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>很多人试图解决 MVC 这种架构下 Controller 比较臃肿的问题，这里我分享一种简洁易懂的Model层，致力于打造更为简洁的DataModel和ViewModel层，同时也适用Controller更加简洁。下面一起分享学习。<a href="https://github.com/SwiftPlayer/ZHModel_Demo">源码：ZHModel_Demo</a></p>
