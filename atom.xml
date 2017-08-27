@@ -226,6 +226,242 @@
   </entry>
   
   <entry>
+    <title>iOS移动端的安全架构设计</title>
+    <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/06/25/iOS%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%9A%84%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/06/25/iOS移动端的安全架构设计/</id>
+    <published>2017-06-25T14:48:04.000Z</published>
+    <updated>2017-08-27T05:25:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>伴随着移动产品广泛应用与快速发展，移动客户端的安全问题越来越受重视。我这里主要谈谈iOS移动端的安全架构设计。</p>
+</blockquote>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>移动端的安全一般可以理解为两个方面：<strong><em>本地安全</em></strong> 、<strong><em>通信安全</em></strong>。</p>
+<blockquote>
+<p><strong>1、本地安全:</strong><br>本地安全主要指客户端本地环境与数据的安全，以及代码被破解获得所导致的安全问题，如：明文存储问题，恶意二次打包问题，越权操作问题等。</p>
+<p><strong>2、通信安全:</strong><br>通信安全主要指客户端与服务端进行数据交互时被拦截破获导致的安全问题。如采取明文进行密码或者数据传输等问题。</p>
+</blockquote>
+<p>关于一些移动端安全的认识还有web安全等等，请参考文章：<a href="https://zhuanlan.zhihu.com/p/26233460?refer=youzanmobile" target="_blank" rel="external">移动端本地安全解决方案</a></p>
+<h2 id="二、安全加密基础的快速认识"><a href="#二、安全加密基础的快速认识" class="headerlink" title="二、安全加密基础的快速认识"></a>二、安全加密基础的快速认识</h2><p>加密分为<strong>对称加密</strong>和<strong>非对称加密</strong>。<br> <strong>1、对称加密</strong><br>加密使用的密钥和解密使用的密钥是相同的。也就是说，加密和解密都是使用的同一个密钥，也就是共享密钥密码。（<em>ps:这个很好理解吧</em>）  常用的对称加密算法：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>英文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DES</td>
+<td>Data Encryption Standard</td>
+</tr>
+<tr>
+<td>3DES</td>
+<td>Triple DES</td>
+</tr>
+<tr>
+<td>AES</td>
+<td>dvanced Encryption Standard</td>
+</tr>
+</tbody>
+</table>
+<p> <strong>2、非对称加密</strong><br> 加密使用的密钥和解密使用的密钥是不相同的。 （<em>ps:这个不好理解？不好理解请好好看看非对称加密算法原理</em>） 简单来说就是有一套算法可以实现你用公钥加密的信息，对方用保留的私钥进行解密。</p>
+<blockquote>
+<p>常说的公钥密码就是指非对称密码，公钥加密就是一种非对称加密。</p>
+</blockquote>
+<p> 最常用的是RSA算法。<a href="http://www.cfca.com.cn/20150811/101230777.html" target="_blank" rel="external">RSA的演算方法是：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">1)用户选择2个够大的保密质数q、p(一般为100位以上十进数)</div><div class="line">2)令n＝pq，n是公开的，从n分解除qp是极其困难的。</div><div class="line">n的欧拉函数：Φ(n)＝(p-1)(q-1)</div><div class="line">Φ(n)小于等于n，并与n互质</div><div class="line">3)选择一个相对大的整数e作为加密指数，使e与Φ(n)互质，</div><div class="line">4)解同等方程：</div><div class="line">ed＝1modΦ(n)</div><div class="line">求出解密指数d</div><div class="line">5)设M、C分别为要加密的明文和被加密的密文(M、C小于n)</div><div class="line">则：加密运算为：C＝Memod n</div><div class="line">解密运算为：M＝Cdmod n</div><div class="line">6)每个用户都有一组密钥(e、d、n)</div><div class="line">(e，n)为PK&apos;可以公开在手册上的公钥，e为加密指数，</div><div class="line">(d，n)为SK’(或PV)是用户保密的私钥</div><div class="line">将p.q销毁</div><div class="line">7)要求明文X</div><div class="line">举例：</div><div class="line">1) 选两个质数： p＝47 q＝71</div><div class="line">2)计算： n＝pq＝3337 Φ(n)＝(47-1)(71-1)＝3220</div><div class="line">3) e必须与Φ(n)互质，选e＝79</div><div class="line">4) 计算：ed=1modΦ(n)＝1mod(3220)</div><div class="line">d＝1019</div><div class="line">将e、n公布，d保密，p.q消毁</div><div class="line">如有一明文 M＝6882326879666683要加密，则先将M分割成多块：</div><div class="line">m1＝688,m2＝232,m3＝687,m4＝966,m5＝668,m6＝3</div><div class="line">将第1块M1加密后得密文C1：</div><div class="line">C1＝m1e(mod3337)＝68879(mod3337)＝1570</div><div class="line">依次对各区块加密后得密文C：</div><div class="line">C＝15702756271422762423158</div><div class="line">对C1解密得m1</div><div class="line">M1＝C1d(mod3337)＝15701019(mod3337)=688</div><div class="line">依次解密得原文M。</div></pre></td></tr></table></figure>
+<p>　　那么问题来了，我们遇到的PBE（Password Based Encryption，基于口令加密）加密啊都是什么呢。详情可以去了解下，这里强调一点，PBE算法的应用还是在对称加密范畴。至于哪种加密方案适合自己的场景，这也是我们今天iOS移动端安全架构设计的时候需要考虑的。<br><strong>知识点延伸：</strong><br><em>1、对称密码与公钥密码对比，消息认证码与数字签名的对比</em></p>
+<table>
+<thead>
+<tr>
+<th>对象属性</th>
+<th>对称密码</th>
+<th>公钥密码（非对称密码）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发送者</td>
+<td>用共享密钥加密-双方持有</td>
+<td>用公钥加密</td>
+</tr>
+<tr>
+<td>接收者</td>
+<td>用共享密钥加密-双方持有</td>
+<td>用私钥解密</td>
+</tr>
+<tr>
+<td>密钥配送问题</td>
+<td>存在</td>
+<td>不存在，但公钥需要另外认证</td>
+</tr>
+<tr>
+<td>机密性</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>对象属性</th>
+<th>消息认证码</th>
+<th>数字签名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发送者</td>
+<td>用共享密钥计算MAC值</td>
+<td><strong><em>用私钥生成签名</em></strong></td>
+</tr>
+<tr>
+<td>接收者</td>
+<td>用共享密钥计算MAC值</td>
+<td><strong><em>用公钥验证签名</em></strong></td>
+</tr>
+<tr>
+<td>密钥配送问题</td>
+<td>存在</td>
+<td>不存在，但公钥需要另外认证</td>
+</tr>
+<tr>
+<td>完整性</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>认证</td>
+<td>✅（仅限通信对象双方）</td>
+<td>✅ （可适用于任何第三方）</td>
+</tr>
+<tr>
+<td>防止否认</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><em>2、公钥密码与数字签名的密钥适用方式</em></p>
+<table>
+<thead>
+<tr>
+<th>对象属性</th>
+<th>公钥</th>
+<th>私钥</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公钥密码</td>
+<td>发送者加密时使用</td>
+<td>接收者解密时使用</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td><em>验证者验证签名时使用</em></td>
+<td><em>签名者生成签名时使用</em></td>
+</tr>
+<tr>
+<td>谁持有密钥？</td>
+<td>只要需要，可任何人都可以持有</td>
+<td>个人持有</td>
+</tr>
+</tbody>
+</table>
+<p>数字签名就是利用非对称加密的原理，只是用法下不一样，反着的。另外为公钥加上数字签名就是证书。</p>
+<h2 id="二、iOS移动端设计的安全考量"><a href="#二、iOS移动端设计的安全考量" class="headerlink" title="二、iOS移动端设计的安全考量"></a>二、iOS移动端设计的安全考量</h2><p>移动客户端设计时，除了上述宽泛的本地安全和通信安全需要考量，具体到模块与业务需要开发者作哪些思考呢？本地密码存储安全怎么保证，客户端web页面怎么防止被劫持，客户端在设计交易时如何考虑安全性等等问题。如今苹果开始强制接口使用HTTPS协议也是为为了增强安全性，但开发者在客户端设计之初也需要考虑这些安全问题，建立一些基础的安全模块。<br><em>（ps：至于涉及到金融类App考虑的安全问题就更多，如交易安全，私钥如何存储等）</em></p>
+<h4 id="1、安全需求分析"><a href="#1、安全需求分析" class="headerlink" title="1、安全需求分析"></a>1、安全需求分析</h4><p>加密原则：</p>
+<blockquote>
+<ol>
+<li>App代码安全，包括代码混淆，加密或者app加壳。</li>
+<li>App数据存储安全，主要指在磁盘做数据持久化的时候所做的加密。</li>
+<li>App网络传输安全，指对数据从客户端传输到Server中间过程的加密，防 止网络世界当中其他节点对数据的窃听。</li>
+</ol>
+</blockquote>
+<p><strong>本地存储安全：</strong><br>1)、明文存储，过度依赖系统安全性（iOS：Keychain/UserDefault）<br>2)、恶意二次打包<br>3)、容易被逆向，被调试<br>4)、敏感信息写入代码</p>
+<p><strong>网络通信安全：</strong><br>1)、HTTP传输被劫持（苹果开始强制接口使用HTTPS协议）<br>2)、明文传输数据</p>
+<blockquote>
+<p><em>另外由本地安全延伸出来：</em><br>1)、本地自动登录如何存储私钥，如何解决又方便用户，又保证安全。<br>2)、金融类、支付类App如何解决支付安全问题，二维码支付的安全问题等等。</p>
+</blockquote>
+<h4 id="2、需求技术准备"><a href="#2、需求技术准备" class="headerlink" title="2、需求技术准备"></a>2、需求技术准备</h4><p>1)、针对本地明文存储的安全漏洞，自然是要本地进行加密，本地加密只是增加了一些复杂度，但也是有效的。比如利用对称算法，通过简单的URLENCODE ＋ BASE64编码防止数据明文传输</p>
+<p>2)、对普通请求、返回数据，生成MD5校验（MD5中加入动态密钥），进行数据完整性（简单防篡改，安全性较低，优点：快速）校验。发送请求也有PBE加密等等</p>
+<p>3)、对于重要数据，使用RSA进行数字签名，起到防篡改作。</p>
+<p>4)、 对于比较敏感的数据，如用户信息（登陆、注册等），客户端发送使用RSA加密，服务器返回使用DES(AES)加密。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本地数据加密</td>
+<td>对NSUserDefaults，sqlite存储文件数据加密，保护帐号和关键信息。</td>
+</tr>
+<tr>
+<td>URL编码加密</td>
+<td>对程序中出现的URL进行编码加密，防止URL被静态分析</td>
+</tr>
+<tr>
+<td>网络传输数据加密</td>
+<td>对客户端传输数据提供加密方案，有效防止通过网络接口的拦截获取</td>
+</tr>
+<tr>
+<td>方法体，方法名高级混淆</td>
+<td>对应用程序的方法名和方法体进行混淆，保证源码被逆向后无法解析代码</td>
+</tr>
+<tr>
+<td>程序结构混排加密</td>
+<td>对应用程序逻辑结构进行打乱混排，保证源码可读性降到最低</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三、iOS移动端安全模块设计"><a href="#三、iOS移动端安全模块设计" class="headerlink" title="三、iOS移动端安全模块设计"></a>三、iOS移动端安全模块设计</h2><h4 id="1、基础模块"><a href="#1、基础模块" class="headerlink" title="1、基础模块"></a>1、基础模块</h4><p><strong>1)、对称加密工具类</strong><br>提供iOS客户端的基础对称加密算法（MD5 \ SHA \ DES \ 3DES \ RC2和RC4 \ IDEA \ DSA \ AES）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line">//Base64加密</div><div class="line">+(NSString *)encodeBase64:(NSString *)input &#123;</div><div class="line">    NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];</div><div class="line">    data = [GTMBase64 encodeData:data];</div><div class="line">    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];</div><div class="line">    NSLog(@&quot;encodeBase64 == %@&quot;,base64String);</div><div class="line">    return base64String;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Base64编码</div><div class="line">+(NSString *)base64EncodeString:(NSString *)string &#123;</div><div class="line">    //1.先把字符串转换为二进制数据</div><div class="line">    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">    //2.对二进制数据进行base64编码，返回编码后的字符串</div><div class="line">    //这是苹果已经给我们提供的方法</div><div class="line">    NSString *str = [data base64EncodedStringWithOptions:0];</div><div class="line">    return str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Base64解密</div><div class="line">+(NSString *)decodeBase64:(NSString *)input &#123;</div><div class="line">    NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];</div><div class="line">    data = [GTMBase64 decodeData:data];</div><div class="line">    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];</div><div class="line">    NSLog(@&quot;decodeBase64 == %@&quot;,base64String);</div><div class="line">    return base64String;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//对base64编码后的字符串进行解码</div><div class="line">+(NSString *)base64DecodeString:(NSString *)string &#123;</div><div class="line">    //1.将base64编码后的字符串『解码』为二进制数据</div><div class="line">    //这是苹果已经给我们提供的方法</div><div class="line">    NSData *data = [[NSData alloc]initWithBase64EncodedString:string options:0];</div><div class="line">    //2.把二进制数据转换为字符串返回</div><div class="line">    NSString *str =  [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];</div><div class="line">    return str;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Base64 字符串解码成 字符串</div><div class="line">+(NSString *)decodeBase64ToHexString:(NSString *)input &#123;</div><div class="line">    //1.将base64编码后的字符串『解码』为二进制数据</div><div class="line">    //这是苹果已经给我们提供的方法</div><div class="line">    NSData *myD = [[NSData alloc]initWithBase64EncodedString:input options:0];</div><div class="line">    Byte *bytes = (Byte *)[myD bytes];</div><div class="line">    //下面是Byte 转换为16进制。</div><div class="line">    NSString *hexStr=@&quot;&quot;;</div><div class="line">    for(int i=0;i&lt;[myD length];i++) &#123;</div><div class="line">        NSString *newHexStr = [NSString stringWithFormat:@&quot;%x&quot;,bytes[i]&amp;0xff];///16进制数</div><div class="line">        if([newHexStr length]==1)</div><div class="line">            hexStr = [NSString stringWithFormat:@&quot;%@0%@&quot;,hexStr,newHexStr];</div><div class="line">        else</div><div class="line">            hexStr = [NSString stringWithFormat:@&quot;%@%@&quot;,hexStr,newHexStr];</div><div class="line">    &#125;</div><div class="line">    return hexStr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//DES 加密</div><div class="line">+(NSData *)encryptUseDES:(NSData *)plainText key:(Byte *)key &#123;</div><div class="line">    NSData *textData = plainText;</div><div class="line">    NSUInteger dataLength = [textData length];</div><div class="line">    unsigned char buffer[1024];</div><div class="line">    memset(buffer, 0, sizeof(char));</div><div class="line">    size_t numBytesEncrypted = 0;</div><div class="line">    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmDES,</div><div class="line">                                          kCCOptionECBMode,</div><div class="line">                                          key, kCCKeySizeDES,</div><div class="line">                                          nil,</div><div class="line">                                          [textData bytes], dataLength,</div><div class="line">                                          buffer, 1024,</div><div class="line">                                          &amp;numBytesEncrypted);</div><div class="line">    if (cryptStatus == kCCSuccess) &#123;</div><div class="line">        NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];</div><div class="line">        return data;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//DES 解密</div><div class="line">+(NSData *)decrypUseDES:(NSData *)plainText key:(Byte *)key &#123;</div><div class="line">    NSData *cipherdata = plainText;</div><div class="line">    unsigned char buffer[1024];</div><div class="line">    memset(buffer, 0, sizeof(char));</div><div class="line">    size_t numBytesDecrypted = 0;</div><div class="line">    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmDES,</div><div class="line">                                          kCCOptionECBMode,</div><div class="line">                                          key, kCCKeySizeDES,</div><div class="line">                                          nil,</div><div class="line">                                          [cipherdata bytes], [cipherdata length],</div><div class="line">                                          buffer, 1024,</div><div class="line">                                          &amp;numBytesDecrypted);</div><div class="line">    if(cryptStatus == kCCSuccess) &#123;</div><div class="line">        NSData *plaindata = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesDecrypted];</div><div class="line">        return plaindata;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/MD5加密返回Nsdata</div><div class="line">+(NSData *)encodeMD5:(NSData *)input &#123;</div><div class="line"> unsigned char result[CC_MD5_DIGEST_LENGTH];</div><div class="line"> CC_MD5(input.bytes, (CC_LONG)input.length, result);</div><div class="line"> NSData *data =[[NSData alloc] initWithBytes:result length:CC_MD5_DIGEST_LENGTH];</div><div class="line"> return data;</div><div class="line">&#125;</div><div class="line"></div><div class="line">如下，生成是小写的MD5的字符串，如果要生成大写的，只需要把</div><div class="line">[ret appendFormat:@&quot;%02X&quot;,result[i]];中的 &quot;%02X&quot;的 X改成小写的 x即可。</div><div class="line"></div><div class="line">//MD5加密返回Nsstring</div><div class="line">+(NSString *)MD5HexDigest:(NSData *)input &#123;</div><div class="line"> unsigned char result[CC_MD5_DIGEST_LENGTH];</div><div class="line"> CC_MD5(input.bytes, (CC_LONG)input.length, result);</div><div class="line"> NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];</div><div class="line"> for (int i = 0; i&lt;CC_MD5_DIGEST_LENGTH; i++)  &#123;</div><div class="line">     [ret appendFormat:@&quot;%02X&quot;,result[i]];</div><div class="line"> &#125;</div><div class="line"> return ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>2)、非对称加密工具类</strong><br>iOS中的Security.framework提供了对RSA算法的支持。这种方式需要对密匙对进行处理，根据public key生成证书，通过private key生成p12格式的密匙。<br>除了Secruty.framework，也可以将openssl库编译到iOS工程中，这可以提供更灵活的使用方式。<br>开源的：<a href="https://github.com/reference/OpenSSLRSAWrapper">OpenSSLRSAWrapper</a> </p>
+<h4 id="2、一些场景方案设计举例：（登录场景token）"><a href="#2、一些场景方案设计举例：（登录场景token）" class="headerlink" title="2、一些场景方案设计举例：（登录场景token）"></a>2、一些场景方案设计举例：（登录场景token）</h4><p><strong>1)、一般的登陆：</strong><br>客户端第一次发出登录请求时， 用户密码以明文的方式传输， 一旦被截获， 后果严重。因此密码需要加密，例如可采用RSA非对称加密。具体流程如下：</p>
+<blockquote>
+<ol>
+<li>客户端向服务器第一次发起登录请求（不传输用户名和密码）。</li>
+<li>服务器利用RSA算法产生一对公钥和私钥。并保留私钥， 将公钥发送给客户端。</li>
+<li>客户端收到公钥后， 加密用户密码， 向服务器发起第二次登录请求（传输用户名和加密后的密码）。</li>
+<li>服务器利用保留的私钥对密文进行解密，得到真正的密码。</li>
+</ol>
+</blockquote>
+<p><strong>2)、token加密：</strong><br>再仔细核对上述登录流程， 我们发现服务器判断用户是否登录， 完全依赖于sessionId, 一旦其被截获， 黑客就能够模拟出用户的请求。于是我们需要引入token的概念： 用户登录成功后， 服务器不但为其分配了sessionId, 还分配了token， token是维持登录状态的关键秘密数据。在服务器向客户端发送的token数据，也需要加密。于是一次登录的细节再次扩展：</p>
+<blockquote>
+<ol>
+<li>客户端向服务器第一次发起登录请求（不传输用户名和密码）。服务器利用RSA算法产生一对公钥和私钥。并保留私钥， 将公钥发送给客户端。</li>
+<li>客户端收到公钥后， 加密用户密码，向服务器发送用户名和加密后的用户密码； 同时另外产生一对公钥和私钥，自己保留私钥, 向服务器发送公钥； 于是第二次登录请求传输了用户名和加密后的密码以及客户端生成的公钥。</li>
+<li>服务器利用保留的私钥对密文进行解密，得到真正的密码。 经过判断， 确定用户可以登录后，生成sessionId和token， 同时利用客户端发送的公钥，对token进行加密。最后将sessionId和加密后的token返还给客户端。</li>
+<li>客户端利用自己生成的私钥对token密文解密， 得到真正的token。</li>
+</ol>
+</blockquote>
+<p>图示如下：<br><img src="http://upload-images.jianshu.io/upload_images/2646525-a998be593c3796f5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>3)、登录保持（也就是http/https数据请求阶段）</strong><br>引入token后，http/https请求被获取问题便可得到解决。 客户端将token和其它的一些变量， 利用散列加密算法得到签名后，连同sessionId一并发送给服务器； 服务器取出保存于服务器端的token，利用相同的法则生成校验签名， 如果客户端签名与服务器的校验签名一致， 就认为请求来自登录的客户端。（支付宝一样的机制）结构图如下：<br><img src="http://upload-images.jianshu.io/upload_images/2646525-20c69d64d5b07cab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>注：token失效的两种情况：</p>
+<pre><code>1、用户登录出系统
+2、token在后台的规定时间内失效（每个token都是有时间效应的）
+</code></pre><p>失效原理：在服务器端的redis中删除相应key为session的键值对。</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>本文只是初步介绍了一些加密的基础知识和iOS客户端安全设计时的基本思路，为大家提供一种参考。当然一些金融类和支付类的App对安全性的要求更高，在支付、扫码等环节的安全设计方案可能需要更加的完善，甚至离线支付时的私钥分端保存等等，这些都是需要思考的，也希望大家给出好的建议和方案。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;伴随着移动产品广泛应用与快速发展，移动客户端的安全问题越来越受重视。我这里主要谈谈iOS移动端的安全架构设计。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; t
+    
+    </summary>
+    
+    
+      <category term="iOS开发" scheme="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/tags/iOS%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>打造更简洁的DataModel和ViewModel</title>
     <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/03/24/%E6%89%93%E9%80%A0%E6%9B%B4%E7%AE%80%E6%B4%81%E7%9A%84DataModel%E5%92%8CViewModel/"/>
     <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/03/24/打造更简洁的DataModel和ViewModel/</id>
