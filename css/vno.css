@@ -5932,9 +5932,8 @@ table {
   table-layout: fixed;
 }
 table td:first-child {
-  width: 3.5%;
+  width: 3%;
   text-align: center;
-  color: #ccc9c9;
 }
 body {
   width: 100%;

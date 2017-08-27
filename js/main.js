@@ -14,6 +14,10 @@ $(document).ready(function() {
     }
   });
 
+ if (window.location.pathname.substring(0, 6) == "/page/") {
+   $('.panel-cover').addClass('panel-cover--collapsed');
+ }
+
   if (window.location.hash && window.location.hash == "#blog") {
     $('.panel-cover').addClass('panel-cover--collapsed');
   }
