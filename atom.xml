@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/"/>
-  <updated>2017-08-27T11:33:01.000Z</updated>
+  <updated>2017-08-27T12:06:18.000Z</updated>
   <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/08/25/README/"/>
+    <id>https://github.com/SwiftPlayer/SwiftPlayer.github.io.git/2017/08/25/README/</id>
+    <published>2017-08-25T14:26:50.000Z</published>
+    <updated>2017-08-27T12:06:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SwiftPlayer-github-io"><a href="#SwiftPlayer-github-io" class="headerlink" title="SwiftPlayer.github.io"></a>SwiftPlayer.github.io</h1><p>基于Hexo搭建的博客</p>
+<p>Haofre的小站:</p>
+<p><img src="https://swiftplayer.github.io/images/show/cover.png" alt=""></p>
+<p><img src="https://swiftplayer.github.io/images/show/list.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;SwiftPlayer-github-io&quot;&gt;&lt;a href=&quot;#SwiftPlayer-github-io&quot; class=&quot;headerlink&quot; title=&quot;SwiftPlayer.github.io&quot;&gt;&lt;/a&gt;SwiftPlayer.github.io&lt;/
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>SiriKit预研</title>
