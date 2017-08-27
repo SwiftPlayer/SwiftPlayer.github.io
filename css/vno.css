@@ -5656,21 +5656,19 @@
 }
 .article-entry pre,
 .article-entry code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
-}
-.article-entry code {
-  background: #eee;
-  text-shadow: 0 1px #fff;
-  padding: 0 0.3em;
+  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace, monospace, font-chs;
+  font-size: 1em;
 }
 .article-entry .line:after {
   content: '';
   display: inline-block;
 }
 .article-entry pre code {
-  background: none;
   text-shadow: none;
   padding: 0;
+  background: none;
+  color: #ccc;
+  box-shadow: none;
 }
 .article-entry .highlight pre {
   border: none;
